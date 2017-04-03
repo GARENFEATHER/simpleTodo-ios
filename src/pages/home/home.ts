@@ -9,9 +9,12 @@ import { HomeService } from "../../providers/home-service";
 })
 export class HomePage {
   tasks;
-  private base = "http://10.0.0.102:3000";
+  private base1 = "http://10.0.0.102:3000";
+  private base2 = "http://123.206.121.176:3000";
+  private base;
 
   constructor(public navCtrl: NavController, public httpService: HomeService) {
+    this.base=this.base2;
     this.httpService.get(this.base + "/task")
       .then(res => {
         if(res) this.tasks=res;
