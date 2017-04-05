@@ -7,12 +7,12 @@
 </ion-header>
 
 <ion-content padding>
-  <form>
+  <form (ngSubmit)="createTask(form)" #form="ngForm">
     <ion-list>
       <ion-item>
         <ion-label floating>What do you need to do?</ion-label>
-        <ion-input type="text"></ion-input>
-        <button ion-button large item-right>Create Task</button>
+        <ion-input type="text" [(ngModel)]="task.title" name="title"></ion-input>
+        <button ion-button large item-right type="submit">Create Task</button>
       </ion-item>
     </ion-list>
   </form>

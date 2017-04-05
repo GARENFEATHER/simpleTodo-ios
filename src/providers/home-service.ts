@@ -10,7 +10,6 @@ import 'rxjs/add/operator/toPromise';
  */
 @Injectable()
 export class HomeService {
-
   constructor(public http: Http) {
     console.log('Hello HomeService Provider');
   }
