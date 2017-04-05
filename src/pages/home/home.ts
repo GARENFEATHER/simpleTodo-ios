@@ -27,23 +27,33 @@ export class HomePage {
   }
 
   createTask() {
-    let alert=this.alertCtrl.create({
-      title: "Empty Input",
-      subTitle: "Empty task is not allowed to be created!",
-      buttons: ["OK"]
-    });
-    alert.present();
+    if(this.task.title == "") {
+      let alert=this.alertCtrl.create({
+        title: "Empty Input",
+        subTitle: "Empty task is not allowed to be created!",
+        buttons: ["OK"]
+      });
+      alert.present();
+      return;
+    }
     this.httpService.post(this.base + "/task", {title: this.task.title, status: this.task.status})
       .then(res => {
         this.tasks.push(res);
+        this.task.title="";
         console.log(res);
       }).catch(function () {
         console.log("create error");
     });
   }
 
-  changeStatus(title: string, status: boolean) {
-
+  changeStatus(task) {
+    this.httpService.post(this.base + "/task", {title: task.title, status: !task.status, create_at: task.create_at})
+      .then(res => {
+        task.status=res.status;
+        console.log(this.tasks);
+      }).catch(function () {
+      console.log("change error");
+    });
   }
 }
 
