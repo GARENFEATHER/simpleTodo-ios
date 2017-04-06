@@ -19,7 +19,10 @@ export class HomePage {
     this.base=this.base2;
     this.httpService.get(this.base + "/task")
       .then(res => {
-        if(res) this.tasks=res;
+        if(res) {
+          this.tasks=res
+          console.log(res);
+        }
         else this.tasks=[];
       }).catch(function (error) {
         console.log(error);
@@ -51,6 +54,7 @@ export class HomePage {
       .then(res => {
         task.status=res.status;
         console.log(this.tasks);
+        console.log(res);
       }).catch(function () {
       console.log("change error");
     });
