@@ -20,14 +20,16 @@ export class HomePage {
   }
 
   changeStatus(task) {
-    this.tasks.splice(this.tasks.splice(this.tasks.indexOf(task),1));
+    var index=this.tasks.indexOf(task)
+    this.tasks.splice(index,1);
     task.status=!task.status;
     this.tasks.push(task);
     this.Tasks.reset(this.tasks);
   }
 
   deleteTask(task) {
-    this.tasks.splice(this.tasks.splice(this.tasks.indexOf(task),1));
+    var index=this.tasks.indexOf(task)
+    this.tasks.splice(index,1);
     this.Tasks.reset(this.tasks);
     console.log("delete "+task);
   }
