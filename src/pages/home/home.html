@@ -16,13 +16,14 @@
   <ion-list>
     <ion-item-sliding *ngFor="let task of tasks">
       <ion-item>
-        <ion-label (click)="changeStatus(task)">{{task.title}}</ion-label>
+        <ion-label [ngStyle]="task.status === true && {'text-decoration': 'line-through'} ||
+                  task.status === false && {'text-decoration': 'none'}" (click)="changeStatus(task)">{{task.title}}</ion-label>
       </ion-item>
 
       <ion-item-options side="right">
         <button ion-button (click)="changeStatus(task)">
-          <ion-icon name="hammer"></ion-icon>
-          Complete
+          <ion-icon name="hammer" ></ion-icon>
+          {{task.status === true && undo || task.status === false && complete}}
         </button>
         <button ion-button color="danger" (click)="deleteTask(task)">
           <ion-icon name="archive"></ion-icon>

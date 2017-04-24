@@ -13,6 +13,8 @@ export class HomePage {
   tasks;
   private task={title: "", status: false};
   private pushPage;
+  private complete="Complete";
+  private undo="Undo";
 
   constructor(public navCtrl: NavController, public Tasks: HomeService, public alertCtrl: AlertController) {
     this.pushPage=CreatePage;
@@ -20,10 +22,12 @@ export class HomePage {
   }
 
   changeStatus(task) {
-    var index=this.tasks.indexOf(task)
-    this.tasks.splice(index,1);
     task.status=!task.status;
-    this.tasks.push(task);
+    if(task.status) {
+      var index=this.tasks.indexOf(task)
+      this.tasks.splice(index,1);
+      this.tasks.push(task);
+    }
     this.Tasks.reset(this.tasks);
   }
 
