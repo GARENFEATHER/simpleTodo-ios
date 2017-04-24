@@ -7,17 +7,22 @@ import { CreatePage } from '../create/create';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
 })
 export class HomePage {
   tasks;
   private task={title: "", status: false};
   private pushPage;
-  private complete="Complete";
-  private undo="Undo";
+  private complete="complete";
+  private undo="undo";
 
   constructor(public navCtrl: NavController, public Tasks: HomeService, public alertCtrl: AlertController) {
+
     this.pushPage=CreatePage;
+    this.tasks=this.Tasks.all();
+  }
+
+  ionViewDidLoad() {
     this.tasks=this.Tasks.all();
   }
 
