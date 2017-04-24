@@ -11,36 +11,25 @@ import { CreatePage } from '../create/create';
 })
 export class HomePage {
   tasks;
-  private base1 = "http://10.0.0.102:3000";//useless
-  private base2 = "http://123.206.121.176:3000";
-  private base;
   private task={title: "", status: false};
   private pushPage;
 
-  constructor(public navCtrl: NavController, public httpService: HomeService, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public Tasks: HomeService, public alertCtrl: AlertController) {
     this.pushPage=CreatePage;
-    this.base=this.base2;
-    this.httpService.get(this.base + "/task")
-      .then(res => {
-        if(res) {
-          this.tasks=res
-          console.log(res);
-        }
-        else this.tasks=[];
-      }).catch(function (error) {
-        console.log(error);
-    });
+    this.tasks=this.Tasks.all();
   }
 
   changeStatus(task) {
-    this.httpService.post(this.base + "/task", {title: task.title, status: !task.status, create_at: task.create_at})
-      .then(res => {
-        task.status=res.status;
-        console.log(this.tasks);
-        console.log(res);
-      }).catch(function () {
-      console.log("change error");
-    });
+    this.tasks.splice(this.tasks.splice(this.tasks.indexOf(task),1));
+    task.status=!task.status;
+    this.tasks.push(task);
+    this.Tasks.reset(this.tasks);
+  }
+
+  deleteTask(task) {
+    this.tasks.splice(this.tasks.splice(this.tasks.indexOf(task),1));
+    this.Tasks.reset(this.tasks);
+    console.log("delete "+task);
   }
 }
 

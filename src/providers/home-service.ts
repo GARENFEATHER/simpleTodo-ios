@@ -14,18 +14,22 @@ export class HomeService {
     console.log('Hello HomeService Provider');
   }
 
-  public get(url) {
-    return this.http.get(url)
-      .toPromise()
-      .then(res => res.json())
-      .catch(error => this.handleError(error));
+  public all() {
+    var taskString=window.localStorage['tasks'];
+    if(taskString) return JSON.parse(taskString);
+    return [];
   }
 
-  public post(url, data) {
-      return this.http.post(url, data)
-        .toPromise()
-        .then(res => res.json())
-        .catch(error => this.handleError(error));
+  public save(task) {
+    var tasks=[];
+    var taskString=window.localStorage['tasks'];
+    if(taskString) tasks=JSON.parse(taskString);
+    tasks.push(task);
+    window.localStorage['tasks']=JSON.stringify(tasks);
+  }
+
+  public reset(tasksNew) {
+    window.localStorage['tasks']=JSON.stringify(tasksNew);
   }
 
   private handleError(error: Response | any) {
