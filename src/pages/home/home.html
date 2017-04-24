@@ -3,23 +3,19 @@
     <ion-title>
       Ionic Blank
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only [navPush]="pushPage">
+        <ion-icon name="paper"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <form (ngSubmit)="createTask(form)" #form="ngForm">
-    <ion-list>
-      <ion-item>
-        <ion-label floating>What do you need to do?</ion-label>
-        <ion-input type="text" [(ngModel)]="task.title" name="title"></ion-input>
-        <button ion-button large item-right type="submit">Create Task</button>
-      </ion-item>
-    </ion-list>
-  </form>
+
   <ion-list>
     <ion-item *ngFor="let task of tasks">
-      <ion-label item-left>{{task.title}}</ion-label>
-      <ion-checkbox color="blue" checked="{{task.status}}" item-right (click)="changeStatus(task)"></ion-checkbox>
+      <ion-label (click)="changeStatus(task)">{{task.title}}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

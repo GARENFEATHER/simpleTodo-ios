@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { HomeService } from "../../providers/home-service";
+import { CreatePage } from '../create/create';
 
 @Component({
   selector: 'page-home',
@@ -14,8 +15,10 @@ export class HomePage {
   private base2 = "http://123.206.121.176:3000";
   private base;
   private task={title: "", status: false};
+  private pushPage;
 
   constructor(public navCtrl: NavController, public httpService: HomeService, public alertCtrl: AlertController) {
+    this.pushPage=CreatePage;
     this.base=this.base2;
     this.httpService.get(this.base + "/task")
       .then(res => {
@@ -26,26 +29,6 @@ export class HomePage {
         else this.tasks=[];
       }).catch(function (error) {
         console.log(error);
-    });
-  }
-
-  createTask() {
-    if(this.task.title == "") {
-      let alert=this.alertCtrl.create({
-        title: "Empty Input",
-        subTitle: "Empty task is not allowed to be created!",
-        buttons: ["OK"]
-      });
-      alert.present();
-      return;
-    }
-    this.httpService.post(this.base + "/task", {title: this.task.title, status: this.task.status})
-      .then(res => {
-        this.tasks.push(res);
-        this.task.title="";
-        console.log(res);
-      }).catch(function () {
-        console.log("create error");
     });
   }
 

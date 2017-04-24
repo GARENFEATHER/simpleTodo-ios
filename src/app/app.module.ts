@@ -7,11 +7,13 @@ import { HomeService } from '../providers/home-service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { CreatePage } from "../pages/create/create";
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    CreatePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -19,7 +21,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    CreatePage
   ],
   providers: [
     StatusBar,
