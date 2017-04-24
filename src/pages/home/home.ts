@@ -10,7 +10,7 @@ import { HomeService } from "../../providers/home-service";
 })
 export class HomePage {
   tasks;
-  private base1 = "http://10.0.0.102:3000";
+  private base1 = "http://10.0.0.102:3000";//useless
   private base2 = "http://123.206.121.176:3000";
   private base;
   private task={title: "", status: false};
